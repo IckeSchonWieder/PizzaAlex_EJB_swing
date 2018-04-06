@@ -254,6 +254,7 @@ public class PizzaClient_AW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
+        // wird bestimmt anders gemacht, neues LookupObjekt bestimmt vermeidbar
         dbr = new LookUpData().lookupDataBeanRemote();
         menuList = dbr.getMenuList();
         initTable();
