@@ -32,10 +32,10 @@ public class LookUpData implements Serializable {
             props.setProperty("java.naming.factory.state", "com.sun.corba.ee.impl.presentation.rmi.JNDIStateFactoryImpl");
 
             // optional.  Defaults ist der  localhost.  
-            props.setProperty("org.omg.CORBA.ORBInitialHost", "klu.com.de");
+            //props.setProperty("org.omg.CORBA.ORBInitialHost", "klu.com.de");
             
             // optional.  Defaults ist Port 3700.  nur benötigt wenn der Port unterschiedlich ist zu 3700.
-            props.setProperty("org.omg.CORBA.ORBInitialPort", "3080");
+            //props.setProperty("org.omg.CORBA.ORBInitialPort", "3080");
             
             //props.setProperty("Context.SECURITY_PRINCIPAL","username" );
             // props.setProperty("Context.SECURITY_CREDENTIALS","password" ); 

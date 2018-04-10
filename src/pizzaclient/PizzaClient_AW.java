@@ -221,6 +221,7 @@ public class PizzaClient_AW extends javax.swing.JFrame {
     public void addToTable(Pizza p){
         Object[] objs = {p.getId(), p.getName(), p.getPrice()};
         tableModel.addRow(objs);
+            
     }
     
     
