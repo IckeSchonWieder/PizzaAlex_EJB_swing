@@ -23,13 +23,10 @@ public class PizzaClient_AW extends javax.swing.JFrame {
      */
     private DefaultTableModel tableModel;
     private List<Pizza> menuList;
-    private DataBeanRemote dbr;
-    
+   
     
     public PizzaClient_AW() {
         initComponents();
-        dbr = new LookUpData().lookupDataBeanRemote();
-        menuList = dbr.getMenuList();
         initTable();
     }
 
@@ -213,6 +210,9 @@ public class PizzaClient_AW extends javax.swing.JFrame {
     }
     
     public void fillTable() {
+        DataBeanRemote dbr = new LookUpData().lookupDataBeanRemote();
+        menuList = dbr.getMenuList();
+        
         for (Pizza p : menuList) {
             addToTable(p);
         }
@@ -221,6 +221,7 @@ public class PizzaClient_AW extends javax.swing.JFrame {
     public void addToTable(Pizza p){
         Object[] objs = {p.getId(), p.getName(), p.getPrice()};
         tableModel.addRow(objs);
+        
             
     }
     
@@ -229,6 +230,7 @@ public class PizzaClient_AW extends javax.swing.JFrame {
         int PNr = Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(),0).toString());
         Pizza p = menuList.stream().filter(c -> (c.getId()== PNr)).findFirst().get();
         
+        DataBeanRemote dbr = new LookUpData().lookupDataBeanRemote();
         dbr.removePizza(p);
         tableModel.removeRow(jTable1.getSelectedRow());
         menuList.remove(p);
@@ -240,11 +242,13 @@ public class PizzaClient_AW extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         Pizza p = new Pizza();
         p.setName(inName.getText());
+        DataBeanRemote dbr = new LookUpData().lookupDataBeanRemote();
         
         try {
             p.setPrice(Double.parseDouble(inPrice.getText()));
-            dbr.storePizza(p);
+            p = dbr.storePizza(p);
             addToTable(p);
+            menuList.add(p);
             System.out.println("Hinzufügen: " + p.toString());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Preis bitte als gültige Fließkommazahl eingeben",
@@ -255,9 +259,6 @@ public class PizzaClient_AW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadActionPerformed
-        // wird bestimmt anders gemacht, neues LookupObjekt bestimmt vermeidbar
-        dbr = new LookUpData().lookupDataBeanRemote();
-        menuList = dbr.getMenuList();
         initTable();
            
     }//GEN-LAST:event_btnReloadActionPerformed
